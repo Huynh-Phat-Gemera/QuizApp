@@ -20,6 +20,7 @@ class _registerState extends State<register> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+	final confirmPasswordController = TextEditingController();
 
   bool _obscureText = true;
 
@@ -27,6 +28,8 @@ class _registerState extends State<register> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+		confirmPasswordController.dispose();
+
     super.dispose();
   }
 
@@ -54,7 +57,7 @@ class _registerState extends State<register> {
             const SizedBox(height: 4),
             TextFormField(
               controller: passwordController,
-              textInputAction: TextInputAction.done,
+              textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 labelText: 'Password',
                 // helperText:"Password must contain special character",
@@ -82,7 +85,38 @@ class _registerState extends State<register> {
                 ? 'Enter min 6 characters'
                 : null,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 4),
+            TextFormField(
+              controller: confirmPasswordController,
+              textInputAction: TextInputAction.done,
+              decoration: InputDecoration(
+                labelText: 'Confirm password',
+                // helperText:"Password must contain special character",
+                suffixIcon: GestureDetector(
+                  onTapDown: (details) {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                  onTapUp: (details) {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                  child: Icon(_obscureText
+                    ? Icons.visibility_off
+                    : Icons.visibility
+									)
+								)
+							),
+              keyboardType: TextInputType.visiblePassword,
+              obscureText: _obscureText,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) => value != null && value.length < 6
+                ? 'Your password is incorrect'
+                : null,
+            ),
+						const SizedBox(height: 20),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50)),
               icon: const Icon(Icons.arrow_forward, size: 32),
