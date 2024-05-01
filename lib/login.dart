@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/utils.dart';
+import 'forgot_password.dart';
 import 'main.dart';
 
 // ignore: camel_case_types
@@ -82,6 +83,18 @@ class _loginState extends State<login> {
             onPressed: signIn,
           ),
           const SizedBox(height: 24),
+					const SizedBox(height: 24),
+					GestureDetector(
+						child: Text(
+							'Forgot Password',
+							style: TextStyle(
+								decoration: TextDecoration.underline,
+								color: Theme.of(context).colorScheme.secondary,
+								fontSize: 20
+							),
+						),
+						onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ForgotPassword())),
+					),
           RichText(
             text: TextSpan(
               style: const TextStyle(color: Colors.amber, fontSize: 20),
