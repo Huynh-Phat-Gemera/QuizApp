@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz_app/navigationBar.dart';
 import 'firebase_options.dart';
-import 'home.dart';
 import 'auth.dart';
 import 'utils.dart';
 
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
 					: snapshot.hasError
 					? const Center(child: Text('Something went wrong!'))
 					: snapshot.hasData
-					? const home()
+					? const navigationBar()
 					: const auth();
       },
     ),
