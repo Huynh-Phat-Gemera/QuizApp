@@ -20,13 +20,12 @@ class _navigationBarState extends State<navigationBar> {
   final navigator_key = GlobalKey<CurvedNavigationBarState>();
   int index = 0;
 
-	final screens = [
-		const home(),
-		const solutions(),
-		null,
-		const library_screen(),
-		const profile()
-	];
+  final screens = [
+    const home(),
+    const solutions(),
+    const library_screen(),
+    const profile()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +39,6 @@ class _navigationBarState extends State<navigationBar> {
         label: 'Solutions',
       ),
       const CurvedNavigationBarItem(
-        child: Icon(
-          Icons.add_circle_outline,
-          size: 35,
-        ),
-      ),
-      const CurvedNavigationBarItem(
         child: Icon(Icons.folder_open_outlined),
         label: 'Library',
       ),
@@ -56,32 +49,32 @@ class _navigationBarState extends State<navigationBar> {
     ];
 
     return Container(
-			color: Colors.lightBlueAccent,
-			child: SafeArea(
-				top: false,
-				child: ClipRect(
-					child: Scaffold(
-						extendBody: true,
-						body: screens[index],
-						bottomNavigationBar: Theme(
-							data: Theme.of(context).copyWith(
-								iconTheme: const IconThemeData(color: Colors.white),
-							),
-							child: CurvedNavigationBar(
-								key: navigator_key,
-								backgroundColor: Colors.transparent,
-								color: Colors.lightBlueAccent,
-								height: 70,
-								index: index,
-								items: items,
-								onTap: (index) => setState(() => this.index = index),
-								animationCurve: Curves.easeInOut,
-								animationDuration: const Duration(milliseconds: 300),
-							),
-						),
-					),
-				),
-			),
-		);
+      color: Colors.lightBlueAccent,
+      child: SafeArea(
+        top: false,
+        child: ClipRect(
+          child: Scaffold(
+            extendBody: true,
+            body: screens[index],
+            bottomNavigationBar: Theme(
+              data: Theme.of(context).copyWith(
+                iconTheme: const IconThemeData(color: Colors.white),
+              ),
+              child: CurvedNavigationBar(
+                key: navigator_key,
+                backgroundColor: Colors.transparent,
+                color: Colors.lightBlueAccent,
+                height: 70,
+                index: index,
+                items: items,
+                onTap: (index) => setState(() => this.index = index),
+                animationCurve: Curves.easeInOut,
+                animationDuration: const Duration(milliseconds: 300),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
