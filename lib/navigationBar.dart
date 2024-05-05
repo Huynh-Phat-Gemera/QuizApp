@@ -18,7 +18,7 @@ class navigationBar extends StatefulWidget {
 class _navigationBarState extends State<navigationBar> {
   // ignore: non_constant_identifier_names
   final navigator_key = GlobalKey<CurvedNavigationBarState>();
-  int index = 3;
+  int index = 0;
 
   final screens = [
     const home(),
