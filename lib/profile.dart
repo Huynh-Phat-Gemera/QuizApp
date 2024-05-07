@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
@@ -12,6 +13,51 @@ class profile extends StatefulWidget {
 // ignore: camel_case_types
 class _profileState extends State<profile> {
 	final user = FirebaseAuth.instance.currentUser!;
+
+	Future<void> _showDeleteConfirmationDialog() async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Deletion'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Are you sure you want to delete your account?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                try {
+                  await user.delete();
+                  await FirebaseAuth.instance.signOut();
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pop();
+                } catch (e) {
+                  if (kDebugMode) {
+                    print("Error deleting user: $e");
+                  }
+                  // Handle error if necessary
+                }
+              },
+              child: const Text(
+                'Delete',
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
 	@override
 	Widget build(BuildContext context) => SafeArea(
@@ -51,7 +97,7 @@ class _profileState extends State<profile> {
 							style: ElevatedButton.styleFrom(
               	minimumSize: const Size.fromHeight(50),
             	),
-							onPressed: () => FirebaseAuth.instance.signOut(),
+							onPressed: _showDeleteConfirmationDialog,
 							child: const Text(
 								'Delete account',
 								style: TextStyle(
