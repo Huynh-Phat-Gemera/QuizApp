@@ -39,6 +39,7 @@ dependencies:
   firebase_core: ^2.27.0
   email_validator: ^2.1.17
   curved_labeled_navigation_bar: ^2.0.2
+  image_picker: ^1.0.8
 
 dev_dependencies:
   flutter_test:

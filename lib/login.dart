@@ -19,7 +19,6 @@ class login extends StatefulWidget {
 class _loginState extends State<login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
   bool _obscureText = true;
 
   @override
@@ -127,10 +126,6 @@ class _loginState extends State<login> {
         password: passwordController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
-
 			Utils.showSnackBar(e.message);
     }
 

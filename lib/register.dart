@@ -21,7 +21,6 @@ class _registerState extends State<register> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 	final confirmPasswordController = TextEditingController();
-
   bool _obscureText = true;
 
   @override
@@ -91,7 +90,6 @@ class _registerState extends State<register> {
               textInputAction: TextInputAction.done,
               decoration: InputDecoration(
                 labelText: 'Confirm password',
-                // helperText:"Password must contain special character",
                 suffixIcon: GestureDetector(
                   onTapDown: (details) {
                     setState(() {
