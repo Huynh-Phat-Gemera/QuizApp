@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,10 +17,12 @@ class profile extends StatefulWidget {
 // ignore: camel_case_types
 class _profileState extends State<profile> {
   final user = FirebaseAuth.instance.currentUser!;
+  final storage = FirebaseStorage.instance.ref();
   final oldPasswordController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   File? _image;
+  UploadTask? _uploadTask;
   bool obscureText = true;
 
   Future<void> _showDeleteConfirmationDialog() async {
@@ -28,9 +31,9 @@ class _profileState extends State<profile> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Confirm Deletion'),
-          content: const SingleChildScrollView(
+          content: SingleChildScrollView(
             child: ListBody(
-              children: <Widget>[
+              children: const <Widget>[
                 Text('Are you sure you want to delete your account?'),
               ],
             ),
@@ -67,11 +70,22 @@ class _profileState extends State<profile> {
   }
 
   Future<void> _pickImage() async {
+    String username = user.email!.split('@')[0];
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
+
     if (pickedImage != null) {
+      final img = File(pickedImage.path);
+      final pathStorage = '$username/avatar/${pickedImage.name}';
+      final ref = storage.child(pathStorage);
+      ref.putFile(File(pickedImage.path));
+      _uploadTask = storage.child(pathStorage).putFile(img);
+      final snapshot = await _uploadTask!.whenComplete(() {});
+      final urlImg = await snapshot.ref.getDownloadURL();
+      print('URL IMAGE: ' + urlImg);
+
       setState(() {
-        _image = File(pickedImage.path);
+        _image = img;
       });
     } else {
       return;
@@ -188,19 +202,19 @@ class _profileState extends State<profile> {
               ),
             ),
             TextButton(
-							onPressed: () async {
-              try {
-								await FirebaseAuth.instance.signInWithEmailAndPassword(
-      					  email: user.email!,
-      					  password: oldPasswordController.text.trim(),
-      					);
-                await user.updatePassword(passwordController.text);
-                // ignore: use_build_context_synchronously
-                Navigator.of(context).pop();
-              } on FirebaseAuthException {
-                Utils.showSnackBar("Error changing password");
-              }
-            },
+              onPressed: () async {
+                try {
+                  await FirebaseAuth.instance.signInWithEmailAndPassword(
+                    email: user.email!,
+                    password: oldPasswordController.text.trim(),
+                  );
+                  await user.updatePassword(passwordController.text);
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pop();
+                } on FirebaseAuthException {
+                  Utils.showSnackBar("Error changing password");
+                }
+              },
               child: const Text(
                 'Save',
                 style: TextStyle(color: Colors.blueAccent),

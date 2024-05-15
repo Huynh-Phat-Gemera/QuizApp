@@ -13,12 +13,12 @@ class _solutionsState extends State<solutions> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-					children: [
+					children: const [
 						Text('solutions page')
 					],
         ))

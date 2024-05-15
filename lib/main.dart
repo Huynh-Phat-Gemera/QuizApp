@@ -21,7 +21,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final navigatorKey = GlobalKey<NavigatorState>();
 
 class _MyAppState extends State<MyApp> {
   @override

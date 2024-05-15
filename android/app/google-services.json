@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "1008237590273",
-    "firebase_url": "https://quizletappfinalproject-default-rtdb.firebaseio.com",
-    "project_id": "quizletappfinalproject",
-    "storage_bucket": "quizletappfinalproject.appspot.com"
+    "project_number": "647342014739",
+    "project_id": "quizlet-clone-fp",
+    "storage_bucket": "quizlet-clone-fp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1008237590273:android:d2ba696438f9a2d9404d00",
+        "mobilesdk_app_id": "1:647342014739:android:1f7c0c4827af1ca95e9ae6",
         "android_client_info": {
           "package_name": "com.example.quiz_app"
         }
@@ -16,7 +15,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAjg69rQCXS_RMIgKHi6mnTs6p15cPwROU"
+          "current_key": "AIzaSyACViW_gUARg0aptWt_0KNufNRVFg8GB2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647342014739:android:7ef1daa291a4cd465e9ae6",
+        "android_client_info": {
+          "package_name": "com.example.quizlet_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACViW_gUARg0aptWt_0KNufNRVFg8GB2A"
         }
       ],
       "services": {

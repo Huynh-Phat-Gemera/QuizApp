@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/utils.dart';
@@ -8,7 +7,7 @@ import 'main.dart';
 
 // ignore: camel_case_types
 class login extends StatefulWidget {
-	final VoidCallback onCLickedSignUp;
+  final VoidCallback onCLickedSignUp;
   const login({Key? key, required this.onCLickedSignUp}) : super(key: key);
 
   @override
@@ -38,7 +37,8 @@ class _loginState extends State<login> {
           const SizedBox(height: 40),
           TextField(
             controller: emailController,
-            cursorColor: Colors.white,
+            autofocus: true,
+            keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             decoration: const InputDecoration(labelText: 'Email'),
           ),

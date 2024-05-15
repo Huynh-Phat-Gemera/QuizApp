@@ -41,51 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDvTH47EYmQZY7rwavIGCzEHXEnhrG31IM',
-    appId: '1:1008237590273:web:30d59f2018a6e0d4404d00',
-    messagingSenderId: '1008237590273',
-    projectId: 'quizletappfinalproject',
-    authDomain: 'quizletappfinalproject.firebaseapp.com',
-    databaseURL: 'https://quizletappfinalproject-default-rtdb.firebaseio.com',
-    storageBucket: 'quizletappfinalproject.appspot.com',
+    apiKey: 'AIzaSyBPgHSmuH_63q8Kxt17DDTIhfUAy0qLPqE',
+    appId: '1:647342014739:web:1ee5e0abe1d66faf5e9ae6',
+    messagingSenderId: '647342014739',
+    projectId: 'quizlet-clone-fp',
+    authDomain: 'quizlet-clone-fp.firebaseapp.com',
+    storageBucket: 'quizlet-clone-fp.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAjg69rQCXS_RMIgKHi6mnTs6p15cPwROU',
-    appId: '1:1008237590273:android:d2ba696438f9a2d9404d00',
-    messagingSenderId: '1008237590273',
-    projectId: 'quizletappfinalproject',
-    databaseURL: 'https://quizletappfinalproject-default-rtdb.firebaseio.com',
-    storageBucket: 'quizletappfinalproject.appspot.com',
+    apiKey: 'AIzaSyACViW_gUARg0aptWt_0KNufNRVFg8GB2A',
+    appId: '1:647342014739:android:1f7c0c4827af1ca95e9ae6',
+    messagingSenderId: '647342014739',
+    projectId: 'quizlet-clone-fp',
+    storageBucket: 'quizlet-clone-fp.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDbPPE_bdbJ_it3Y-jXDrsID-lZuBo7NKI',
-    appId: '1:1008237590273:ios:1e0b4909fb6f7fa9404d00',
-    messagingSenderId: '1008237590273',
-    projectId: 'quizletappfinalproject',
-    databaseURL: 'https://quizletappfinalproject-default-rtdb.firebaseio.com',
-    storageBucket: 'quizletappfinalproject.appspot.com',
+    apiKey: 'AIzaSyCRbrNDdAes17QAoj1eWneCgRJBjwJrDGU',
+    appId: '1:647342014739:ios:0c6b0d6f92dc92445e9ae6',
+    messagingSenderId: '647342014739',
+    projectId: 'quizlet-clone-fp',
+    storageBucket: 'quizlet-clone-fp.appspot.com',
     iosBundleId: 'com.example.quizApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDbPPE_bdbJ_it3Y-jXDrsID-lZuBo7NKI',
-    appId: '1:1008237590273:ios:1e0b4909fb6f7fa9404d00',
-    messagingSenderId: '1008237590273',
-    projectId: 'quizletappfinalproject',
-    databaseURL: 'https://quizletappfinalproject-default-rtdb.firebaseio.com',
-    storageBucket: 'quizletappfinalproject.appspot.com',
+    apiKey: 'AIzaSyCRbrNDdAes17QAoj1eWneCgRJBjwJrDGU',
+    appId: '1:647342014739:ios:0c6b0d6f92dc92445e9ae6',
+    messagingSenderId: '647342014739',
+    projectId: 'quizlet-clone-fp',
+    storageBucket: 'quizlet-clone-fp.appspot.com',
     iosBundleId: 'com.example.quizApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDvTH47EYmQZY7rwavIGCzEHXEnhrG31IM',
-    appId: '1:1008237590273:web:8792b07e4901febd404d00',
-    messagingSenderId: '1008237590273',
-    projectId: 'quizletappfinalproject',
-    authDomain: 'quizletappfinalproject.firebaseapp.com',
-    databaseURL: 'https://quizletappfinalproject-default-rtdb.firebaseio.com',
-    storageBucket: 'quizletappfinalproject.appspot.com',
+    apiKey: 'AIzaSyBPgHSmuH_63q8Kxt17DDTIhfUAy0qLPqE',
+    appId: '1:647342014739:web:f94156ff67e45ee35e9ae6',
+    messagingSenderId: '647342014739',
+    projectId: 'quizlet-clone-fp',
+    authDomain: 'quizlet-clone-fp.firebaseapp.com',
+    storageBucket: 'quizlet-clone-fp.appspot.com',
   );
+
 }

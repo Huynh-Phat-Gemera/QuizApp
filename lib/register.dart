@@ -44,7 +44,7 @@ class _registerState extends State<register> {
             const SizedBox(height: 40),
             TextFormField(
               controller: emailController,
-              cursorColor: Colors.white,
+							autofocus: true,
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(labelText: 'Email'),
               autovalidateMode: AutovalidateMode.onUserInteraction,

@@ -12,13 +12,13 @@ class home extends StatefulWidget {
 class _homeState extends State<home> {
 
   @override
-  Widget build(BuildContext context) => const SafeArea(
+  Widget build(BuildContext context) => SafeArea(
 		child: Scaffold(
 			body: Padding(
 				padding: EdgeInsets.all(20),
 				child: Column(
 					mainAxisAlignment: MainAxisAlignment.center,
-					children: [
+					children: const [
 						Text(
 							'Home page',
 							style: TextStyle(fontSize: 16),

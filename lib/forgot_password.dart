@@ -44,7 +44,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: emailController,
-                  cursorColor: Colors.white,
+                  autofocus: true,
                   textInputAction: TextInputAction.done,
                   decoration: const InputDecoration(labelText: 'Email'),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
