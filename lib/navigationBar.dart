@@ -1,5 +1,4 @@
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/library_screen.dart';
 import 'package:quiz_app/profile.dart';
@@ -29,23 +28,11 @@ class _navigationBarState extends State<navigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    final items = [
-      const CurvedNavigationBarItem(
-        child: Icon(Icons.home_outlined),
-        label: 'Home',
-      ),
-      const CurvedNavigationBarItem(
-        child: Icon(Icons.book_outlined),
-        label: 'Solutions',
-      ),
-      const CurvedNavigationBarItem(
-        child: Icon(Icons.folder_open_outlined),
-        label: 'Library',
-      ),
-      const CurvedNavigationBarItem(
-        child: Icon(Icons.person_outline),
-        label: 'Profile',
-      ),
+    final items = <Widget> [
+      const Icon(Icons.home_outlined),
+      const Icon(Icons.book_outlined),
+      const Icon(Icons.folder_open_outlined),
+      const Icon(Icons.person_outline),
     ];
 
     return Container(

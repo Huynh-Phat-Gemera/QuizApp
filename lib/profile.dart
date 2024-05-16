@@ -24,6 +24,7 @@ class _profileState extends State<profile> {
   File? _image;
   UploadTask? _uploadTask;
   bool obscureText = true;
+  String? _imageUrl;
 
   Future<void> _showDeleteConfirmationDialog() async {
     return showDialog<void>(
@@ -31,9 +32,9 @@ class _profileState extends State<profile> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Confirm Deletion'),
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[
+              children: <Widget>[
                 Text('Are you sure you want to delete your account?'),
               ],
             ),
@@ -75,18 +76,30 @@ class _profileState extends State<profile> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
-      final img = File(pickedImage.path);
-      final pathStorage = '$username/avatar/${pickedImage.name}';
-      final ref = storage.child(pathStorage);
-      ref.putFile(File(pickedImage.path));
-      _uploadTask = storage.child(pathStorage).putFile(img);
-      final snapshot = await _uploadTask!.whenComplete(() {});
-      final urlImg = await snapshot.ref.getDownloadURL();
-      print('URL IMAGE: ' + urlImg);
+      if (kIsWeb) {
+        final ref = storage.child('$username/avatar/${pickedImage.name}');
+        final uploadTask = ref.putData(await pickedImage.readAsBytes());
+        final snapshot = await uploadTask.whenComplete(() {});
+        final urlImg = await snapshot.ref.getDownloadURL();
+        print('URL IMAGE: $urlImg');
 
-      setState(() {
-        _image = img;
-      });
+        setState(() {
+          _image = null;
+          _imageUrl = urlImg;
+        });
+      } else {
+        final file = File(pickedImage.path);
+        final ref = storage.child('$username/avatar/${pickedImage.name}');
+        _uploadTask = ref.putFile(file);
+        final snapshot = await _uploadTask!.whenComplete(() {});
+        final urlImg = await snapshot.ref.getDownloadURL();
+        print('URL IMAGE: $urlImg');
+
+        setState(() {
+          _image = file;
+          _imageUrl = urlImg;
+        });
+      }
     } else {
       return;
     }
@@ -240,57 +253,60 @@ class _profileState extends State<profile> {
         maintainBottomViewPadding: true,
         minimum: const EdgeInsets.all(20),
         child: Scaffold(
-            body: Center(
-          child: Column(
-            children: [
-              const SizedBox(height: 100),
-              CircleAvatar(
-                backgroundColor: Colors.grey.shade800,
-                backgroundImage: (_image != null) ? FileImage(_image!) : null,
-                radius: 50,
-                child: IconButton(
-                  iconSize: 70,
-                  icon: const Icon(null),
-                  onPressed: _pickImage,
+          body: Center(
+            child: Column(
+              children: [
+                const SizedBox(height: 100),
+                CircleAvatar(
+                  backgroundColor: Colors.grey.shade800,
+                  backgroundImage: _imageUrl != null
+                      ? NetworkImage(_imageUrl!)
+                      : const AssetImage('assets/default_img.jpg') as ImageProvider,
+                  radius: 50,
+                  child: IconButton(
+                    iconSize: 70,
+                    icon: const Icon(null),
+                    onPressed: _pickImage,
+                  ),
                 ),
-              ),
-              Text(
-                user.email!.split('@')[0],
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                  ),
-                  onPressed: _showChangePasswordDialog,
-                  child: const Text(
-                    'Change password',
-                    style: TextStyle(fontSize: 20),
-                  )),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                  ),
-                  onPressed: () => FirebaseAuth.instance.signOut(),
-                  child: const Text(
-                    'Sign out',
-                    style: TextStyle(fontSize: 20),
-                  )),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                  ),
-                  onPressed: _showDeleteConfirmationDialog,
-                  child: const Text(
-                    'Delete account',
-                    style: TextStyle(fontSize: 20, color: Colors.redAccent),
-                  )),
-            ],
+                Text(
+                  user.email!.split('@')[0],
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    onPressed: _showChangePasswordDialog,
+                    child: const Text(
+                      'Change password',
+                      style: TextStyle(fontSize: 20),
+                    )),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    onPressed: () => FirebaseAuth.instance.signOut(),
+                    child: const Text(
+                      'Sign out',
+                      style: TextStyle(fontSize: 20),
+                    )),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    onPressed: _showDeleteConfirmationDialog,
+                    child: const Text(
+                      'Delete account',
+                      style: TextStyle(fontSize: 20, color: Colors.redAccent),
+                    )),
+              ],
+            ),
           ),
-        )),
+        ),
       );
 }
